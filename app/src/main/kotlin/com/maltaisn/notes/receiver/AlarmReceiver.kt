@@ -76,7 +76,7 @@ class AlarmReceiver : BroadcastReceiver() {
             pendingIntentBaseFlags = pendingIntentBaseFlags or PendingIntent.FLAG_IMMUTABLE
         }
 
-        val noteText = note.asText(includeTitle = false).ifBlank { null }
+        val noteText = note.asText(includeTitle = false, keepCheckedItems = false).ifBlank { null }
         val builder = NotificationCompat.Builder(context, App.NOTIFICATION_CHANNEL_ID)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setSmallIcon(R.drawable.ic_app_icon)
