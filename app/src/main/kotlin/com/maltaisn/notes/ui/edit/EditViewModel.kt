@@ -755,10 +755,16 @@ class EditViewModel @AssistedInject constructor(
     override fun onNoteItemAddClicked(pos: Int) {
         // pos is the position of EditItemAdd item, which is also the position to insert the new item.
         // The new item is added last, so the actual pos is the maximum plus one.
-        val actualPos = listItems.maxOf { (it as? EditItemItem)?.actualPos ?: -1 } + 1
-        listItems.add(pos, EditItemItem(DefaultEditableText(), checked = false, editable = true, actualPos))
+        //val actualPos = listItems.maxOf { (it as? EditItemItem)?.actualPos ?: -1 } + 1
+        val actualPos = 0
+        for (item in listItems) {
+            if (item is EditItemItem) {
+                item.actualPos++
+            }
+        }
+        listItems.add(0, EditItemItem(DefaultEditableText(), checked = false, editable = true, actualPos))
         updateListItems()
-        focusItemAt(pos, 0, false)
+        focusItemAt(0, 0, false)
     }
 
     override fun onNoteLabelClicked() {
